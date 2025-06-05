@@ -76,7 +76,6 @@
 	  <Folder Include="Services\Handlers\" />
 	  <Folder Include="Services\Interfaces\" />
 	  <Folder Include="Views\" />
-	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
 </Project>

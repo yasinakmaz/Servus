@@ -2,23 +2,50 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private ProductCreateViewModel _viewModel;
 
         public MainPage()
         {
             InitializeComponent();
+            _viewModel = new ProductCreateViewModel();
+            BindingContext = _viewModel;
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            count++;
+            base.OnAppearing();
+            await _viewModel.LoadDataAsync();
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        private async void OnPickImageClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = await FilePicker.Default.PickAsync(new PickOptions
+                {
+                    PickerTitle = "Resim Seçiniz",
+                    FileTypes = FilePickerFileType.Images
+                });
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+                if (result != null)
+                {
+                    await _viewModel.HandleImageSelectedAsync(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Hata", $"Resim seçilirken hata oluştu: {ex.Message}", "Tamam");
+            }
+        }
+
+        private void OnAddFirstChoiceClicked(object sender, EventArgs e)
+        {
+            _viewModel.AddFirstChoice();
+        }
+
+        private void OnAddSecondChoiceClicked(object sender, EventArgs e)
+        {
+            _viewModel.AddSecondChoice();
         }
     }
 }

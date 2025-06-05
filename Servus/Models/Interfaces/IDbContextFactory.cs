@@ -3,5 +3,6 @@
     public interface IDbContextFactory
     {
         ProductDbContext CreateContext(DatabaseProvider provider);
+        ProductDbContext CreateContext();
     }
 }

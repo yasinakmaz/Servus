@@ -11,5 +11,7 @@
         Task<bool> ExistsAsync(int IND);
         Task<int> CountAsync();
         Task<int> CountAsync(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> predicate);
+        Task<T?> FindFirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
     }
 }

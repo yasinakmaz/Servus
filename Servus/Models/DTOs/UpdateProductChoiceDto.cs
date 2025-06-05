@@ -1,7 +1,9 @@
 ﻿namespace Servus.Models.DTOs
 {
-    public class CreateProductChoiceDto
+    public class UpdateProductChoiceDto
     {
+        public int? IND { get; set; }
+
         [Required(ErrorMessage = "Seçenek adı zorunludur")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Seçenek adı 2-100 karakter arasında olmalıdır")]
         public string ChoiceName { get; set; } = string.Empty;
@@ -15,7 +17,7 @@
 
         public bool IsActive { get; set; } = true;
 
-        [StringLength(100, ErrorMessage = "Oluşturan kişi bilgisi maksimum 100 karakter olabilir")]
-        public string? CreatedBy { get; set; }
+        [StringLength(100, ErrorMessage = "Güncelleyen kişi bilgisi maksimum 100 karakter olabilir")]
+        public string? UpdatedBy { get; set; }
     }
 }
